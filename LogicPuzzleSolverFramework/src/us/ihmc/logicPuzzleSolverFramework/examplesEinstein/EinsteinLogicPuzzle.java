@@ -27,6 +27,7 @@ public class EinsteinLogicPuzzle
 		puzzle.addProperty(smokeProperty);
 		puzzle.addProperty(petProperty);
 
+		
 		ruleChecker.setNationalityProperty(nationalityProperty);
 		ruleChecker.setColorProperty(colorProperty);
 		ruleChecker.setDrinkProperty(drinkProperty);
