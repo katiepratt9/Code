@@ -1,11 +1,18 @@
 package chooseOwn;
 
+//import  sun.audio.*;    //import the sun.audio package
+//import  java.io.*;
 //acts as game to keep the story moving
 public class StoryBoard
 {
 	private final EscapeTheRoom adventure;
 	private final EscapeTheRoomPlayer player;
 
+	//// AudioStream as = new AudioStream (url.openStream());
+	//
+	// AudioPlayer.player.start(as);
+	//
+	// AudioPlayer.player.stop(as);
 	public StoryBoard(EscapeTheRoom adventure, EscapeTheRoomPlayer player)
 	{
 		this.adventure = adventure;

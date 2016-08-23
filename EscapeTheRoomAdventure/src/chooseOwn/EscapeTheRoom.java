@@ -1,5 +1,6 @@
 package chooseOwn;
 
+// play ambience audio the whole time 
 public class EscapeTheRoom
 {
 	private boolean bedPickedUp = false;
@@ -20,7 +21,7 @@ public class EscapeTheRoom
 	boolean inventory = false;
 
 	private EscapeTheRoomListener listener;
-	
+
 	public EscapeTheRoom()
 	{
 		listener = new EscapeTheRoomListener()
@@ -29,14 +30,15 @@ public class EscapeTheRoom
 			public void deliverMessage(String message)
 			{
 				System.out.println(message);
-			}};
+			}
+		};
 	}
-	
+
 	public void setListener(EscapeTheRoomListener listener)
 	{
 		this.listener = listener;
 	}
-	
+
 	public void updatePosition(int value)
 	{
 		if (value == 1)
@@ -192,7 +194,7 @@ public class EscapeTheRoom
 			actionPickUpInBegining();
 			break;
 		default:
-			listener.deliverMessage("That is not an action you can do, try again.");
+			listener.deliverMessage("That is not an action you can do. try again.");
 			chooseBegining(action);
 			break;
 		}
@@ -204,8 +206,14 @@ public class EscapeTheRoom
 	{
 		if (inventory = true && positionMiddle == true)
 		{
-			listener.deliverMessage("You Place the bed in the middle of the room.");
-			listener.deliverMessage("You remember how much you hate tight places");
+			listener.deliverMessage("You Place the bed in the middle of the room....");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("You remember how much you hate tight places");
+			} catch (InterruptedException e)
+			{
+			}
 			inventory = false;
 			bedMoved = true;
 		}
@@ -217,16 +225,22 @@ public class EscapeTheRoom
 		{
 			listener.deliverMessage("You don't have anything to place.");
 		}
-
 	}
 
 	private void actionPickUpInBegining()
 	{
 		if (positionLeftSide == true && bedPickedUp == false)
 		{
-			listener.deliverMessage("You Pick up the bed it is heavier than suspected, you need to put it down somewhere.");
+			listener.deliverMessage("You Pick up the bed it is heavier than suspected....");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("You need to put it down somewhere.");
+			} catch (InterruptedException e)
+			{
+			}
 			inventory = true;
-			bedPickedUp =true;
+			bedPickedUp = true;
 		}
 		else if (inventory = true && bedPickedUp == true)
 		{
@@ -295,17 +309,39 @@ public class EscapeTheRoom
 		}
 		else if (positionLeftSide == true)
 		{
-			listener.deliverMessage(
-					"The bed looks uncomfortable to sleep on, it also looks light, mabye even light enough to carry...");
+			listener.deliverMessage("The bed looks uncomfortable to sleep on. It also looks light,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("mabye even light enough to carry...");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionRightSide == true)
 		{
-			listener.deliverMessage("The dresser is a faded brown, it looks sturdy and would be immposible to move");
+			listener.deliverMessage("The dresser is a faded brown, it looks sturdy...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("and would be immposible to move without help.");
+			} catch (InterruptedException e)
+			{
+
+			}
 		}
+
 		else if (positionFront == true)
 		{
 			listener.deliverMessage(
-					"The metal door is locked, and strong enough that you wouldn't be able to break it down, you have to find a key to open it");
+					"The metal door is locked, and strong enough that you wouldn't be able to break it down,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("you have to find a key to open it");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionBack == true)
 		{
@@ -317,8 +353,16 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			listener.deliverMessage(
-					"The room is a sqaure shape, the walls are made of concrete, in front of you is a metal door, to Your left you see a ratty bed, to your right you see a dresser, behind you is a table.");
+			listener.deliverMessage("The room is a sqaure shape, the walls are made of concrete,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("in front of you is a metal door, to Your left you see a ratty bed,...");
+				Thread.sleep(2000);
+				listener.deliverMessage("to your right you see a dresser, behind you is a table.");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionLeftSide == true)
 		{
@@ -328,8 +372,14 @@ public class EscapeTheRoom
 			}
 			else
 			{
-				listener.deliverMessage(
-						"In front of you is a knee high dirty bed, it has dusty, pale white sheets and a thin pillow at the head.");
+				listener.deliverMessage("In front of you is a knee high dirty bed,...");
+				try
+				{
+					Thread.sleep(2000);
+					listener.deliverMessage("it has dusty, pale white sheets and a thin pillow at the head.");
+				} catch (InterruptedException e)
+				{
+				}
 			}
 		}
 		else if (positionRightSide == true)
@@ -358,8 +408,14 @@ public class EscapeTheRoom
 		}
 		else if (positionRightSide == true)
 		{
-			listener.deliverMessage(
-					"The dresser isn't locked, but doors are stuck and wont budge open, you need something to get some leverage.");
+			listener.deliverMessage("The dresser isn't locked, but doors are stuck and wont budge open,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("you need something to get some leverage.");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionFront == true)
 		{
@@ -421,12 +477,20 @@ public class EscapeTheRoom
 
 	private void actionPickUpInBeginingTwo()
 	{
-		if (positionLeftSide == true)
+		if (positionLeftSide == true && bedMoved == true)
 		{
-			listener.deliverMessage("You bend down and pick up the crowbar, it looks like its been sitting there for years.");
-			inventory = true;
-			crowbarPickedUp = true;
-			listener.deliverMessage("The room seems smaller than it was a second ago");
+			listener.deliverMessage("You bend down and pick up the crowbar,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("it looks like its been sitting there for years....");
+				inventory = true;
+				crowbarPickedUp = true;
+				Thread.sleep(2000);
+				listener.deliverMessage("The room seems smaller than it was a second ago");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionBack == true)
 			listener.deliverMessage("Even if you picked up the hammer, theres nothing to use it on.");
@@ -482,28 +546,51 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			listener.deliverMessage(
-					"your in the middle of the room standing on the bed, you can feel it creaking under your weight, theres nothing new about the bed, and there's no give in the ceiling when you push against it.");
+			listener.deliverMessage("your in the middle of the room standing on the bed,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("you can feel it creaking under your weight,...");
+				Thread.sleep(2000);
+				listener.deliverMessage(
+						"theres nothing new about the bed, and there's no give in the ceiling when you push against it.");
+
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionLeftSide == true)
 		{
 			listener.deliverMessage(
-					"You look at the empty space where the bed used to be and see a crowbar lying on the floor, it looks like it's been there for years.");
+					"You look at the empty space where the bed used to be and see a crowbar lying on the floor,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("it looks like it's been there for years.");
+			} catch (InterruptedException e)
+			{
+			}
 		}
-		else if (positionRightSide == true )
+		else if (positionRightSide == true)
 		{
 			listener.deliverMessage("The dresser is a faded brown, it looks sturdy and would be immposible to move");
 		}
 		else if (positionFront == true)
 		{
 			listener.deliverMessage(
-					"The metal door is locked, and strong enough that you wouldn't be able to break it down, you have to find a key to open it");
+					"The metal door is locked, and strong enough that you wouldn't be able to break it down,... ");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("you have to find a key to open it");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionBack == true)
 		{
 			listener.deliverMessage("the table has a hammer sitting on it, the hammer looks weak from overuse.");
 		}
-
 	}
 
 	private void openInBegginingTwo()
@@ -518,8 +605,14 @@ public class EscapeTheRoom
 		}
 		else if (positionRightSide == true)
 		{
-			listener.deliverMessage(
-					"The dresser isn't locked, but doors are stuck and wont budge open, you need something to get some leverage.");
+			listener.deliverMessage("The dresser isn't locked, but doors are stuck and wont budge open,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("you need something to get some leverage.");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionFront == true)
 		{
@@ -536,10 +629,16 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			listener.deliverMessage(
-					"In front of you is a knee high dirty bed, it has dusty, pale white sheets and a thin pillow at the head.");
-			listener.deliverMessage(
-					"The room is a sqaure shape, the walls are made of concrete, in front of you is a metal door, to Your left you see a ratty bed, to your right you see a dresser, behind you is a table.");
+			listener.deliverMessage("The room is a sqaure shape, the walls are made of concrete,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("in front of you is a metal door, to Your left you see a ratty bed,...");
+				Thread.sleep(2000);
+				listener.deliverMessage("to your right you see a dresser, behind you is a table.");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionLeftSide == true)
 		{
@@ -613,8 +712,14 @@ public class EscapeTheRoom
 	{
 		if (positionRightSide == true && dresserOpened == true)
 		{
-			listener.deliverMessage("You pick up a glass container with a key in it, you can't open it.");
-			listener.deliverMessage("you feel like the room is shrinking");
+			listener.deliverMessage("You pick up a glass container with a key in it, you can't open it....");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("you feel like the room is shrinking");
+			} catch (InterruptedException e)
+			{
+			}
 			inventory = true;
 			keyContainerPickedUp = true;
 		}
@@ -636,15 +741,17 @@ public class EscapeTheRoom
 	}
 
 	private void PlaceInMiddle()
-	{if(inventory = false)
 	{
-		listener.deliverMessage("You don't have anything to place.");
+		if (inventory = false)
+		{
+			listener.deliverMessage("You don't have anything to place.");
+		}
+		else
+		{
+			listener.deliverMessage("why would you place the crowbar?");
+		}
 	}
-	else
-	{
-	listener.deliverMessage("why would you place the crowbar?");	
-	}
-	}
+
 	private void moveToRightInMiddle()
 	{
 		listener.deliverMessage("You move to the right so that you are standing in front of the dresser.");
@@ -679,26 +786,50 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			listener.deliverMessage(
-					"your in the middle of the room standing on the bed, you can feel it creaking under your weight, theres nothing new about the bed, and there's no give in the ceiling when you push against it.");
+			listener.deliverMessage("your in the middle of the room standing on the bed,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("you can feel it creaking under your weight,...");
+				Thread.sleep(2000);
+				listener.deliverMessage(
+						"theres nothing new about the bed, and there's no give in the ceiling when you push against it.");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionLeftSide == true)
 		{
-			listener.deliverMessage("You look at the empty space where the bed used to be and see a whole lot'a nothing.");
+			listener.deliverMessage(
+					"You look at the empty space where the bed used to be and see a whole lot'a nothing.");
 		}
 		else if (positionRightSide == true && dresserOpened == false)
 		{
 			listener.deliverMessage(
-					"The dresser is a faded brown, it looks sturdy and would be immposible to move, but you can probably use the crowbar to open it.");
+					"The dresser is a faded brown, it looks sturdy and would be immposible to move,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage(" but you can probably use the crowbar to open it.");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (dresserOpened == true)
 		{
-		listener.deliverMessage("You see a glass container with something encased in it on one of the shelves.");
+			listener.deliverMessage("You see a glass container with something encased in it on one of the shelves.");
 		}
 		else if (positionFront == true)
 		{
 			listener.deliverMessage(
-					"The metal door is locked, and strong enough that you wouldn't be able to break it down, you have to find a key to open it");
+					"The metal door is locked, and strong enough that you wouldn't be able to break it down,");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("you have to find a key to open it");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionBack == true)
 		{
@@ -722,7 +853,7 @@ public class EscapeTheRoom
 			listener.deliverMessage("You use the crowbar to open the dresser, dust fly's everywhere.");
 			dresserOpened = true;
 		}
-		else if(dresserOpened == true)
+		else if (dresserOpened == true)
 		{
 			listener.deliverMessage("already opened.");
 		}
@@ -740,10 +871,14 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			listener.deliverMessage(
-					"In front of you is a knee high dirty bed, it has dusty, pale white sheets and a thin pillow at the head.");
-			listener.deliverMessage(
-					"The room is a sqaure shape, the walls are made of concrete, in front of you is a metal door, to Your left you see a ratty bed, to your right you see a dresser, behind you is a table.");
+			listener.deliverMessage("In front of you is a knee high dirty bed,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("it has dusty, pale white sheets and a thin pillow at the head.");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionLeftSide == true)
 		{
@@ -753,7 +888,7 @@ public class EscapeTheRoom
 		{
 			listener.deliverMessage("in front of you is a heavy, old dresser, it is currently closed.");
 		}
-		else if(dresserOpened == true)
+		else if (dresserOpened == true)
 		{
 			listener.deliverMessage("The dresser is opened, you see something inside.");
 		}
@@ -819,7 +954,7 @@ public class EscapeTheRoom
 	{
 		if (positionBack == true)
 		{
-			listener.deliverMessage("Your already holding the key, you have to put it down first.");
+			listener.deliverMessage("Your already holding the key container, you have to put it down first.");
 		}
 		else
 		{
@@ -838,7 +973,13 @@ public class EscapeTheRoom
 		if (positionBack == true)
 		{
 			listener.deliverMessage("You place the glass container on the table.");
-			listener.deliverMessage("You think you see a the walls move out of the corner of your eye");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("You think you see a the walls move out of the corner of your eye");
+			} catch (InterruptedException e)
+			{
+			}
 			inventory = false;
 			keyContainerPlaced = true;
 		}
@@ -883,12 +1024,22 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			listener.deliverMessage(
-					"your in the middle of the room standing on the bed, you can feel it creaking under your weight, theres nothing new about the bed, and there's no give in the ceiling when you push against it.");
+			listener.deliverMessage("your in the middle of the room standing on the bed,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("you can feel it creaking under your weight,...");
+				Thread.sleep(2000);
+				listener.deliverMessage(
+						"theres nothing new about the bed, and there's no give in the ceiling when you push against it.");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionLeftSide == true)
 		{
-			listener.deliverMessage("You look at the empty space where the bed used to be and see a whole lot'a nothing.");
+			listener.deliverMessage(
+					"You look at the empty space where the bed used to be and see a whole lot'a nothing.");
 		}
 		else if (positionRightSide == true)
 		{
@@ -898,7 +1049,8 @@ public class EscapeTheRoom
 		else if (positionFront == true)
 		{
 			listener.deliverMessage(
-					"The metal door is locked, and strong enough that you wouldn't be able to break it down, you have to find a key to open it");
+					"The metal door is locked, and strong enough that you wouldn't be able to break it down,"
+							+ " you have to find a key to open it");
 		}
 		else if (positionBack == true)
 		{
@@ -937,10 +1089,14 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			listener.deliverMessage(
-					"In front of you is a knee high dirty bed, it has dusty, pale white sheets and a thin pillow at the head.");
-			listener.deliverMessage(
-					"The room is a sqaure shape, the walls are made of concrete, in front of you is a metal door, to Your left you see a ratty bed, to your right you see a dresser, behind you is a table.");
+			listener.deliverMessage("In front of you is a knee high dirty bed,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("it has dusty, pale white sheets and a thin pillow at the head.");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionLeftSide == true)
 		{
@@ -948,7 +1104,8 @@ public class EscapeTheRoom
 		}
 		else if (positionRightSide == true)
 		{
-			listener.deliverMessage("in front of you is a heavy, old dresser, it is currently opened but has nothing inside.");
+			listener.deliverMessage(
+					"in front of you is a heavy, old dresser, it is currently opened but has nothing inside.");
 		}
 		else if (positionBack == true)
 		{
@@ -1020,10 +1177,14 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			listener.deliverMessage(
-					"In front of you is a knee high dirty bed, it has dusty, pale white sheets and a thin pillow at the head.");
-			listener.deliverMessage(
-					"The room is a sqaure shape, the walls are made of concrete, in front of you is a metal door, to Your left you see a ratty bed, to your right you see a dresser, behind you is a table.");
+			listener.deliverMessage("In front of you is a knee high dirty bed,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("it has dusty, pale white sheets and a thin pillow at the head.");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionLeftSide == true)
 		{
@@ -1031,7 +1192,8 @@ public class EscapeTheRoom
 		}
 		else if (positionRightSide == true)
 		{
-			listener.deliverMessage("in front of you is a heavy, old dresser, it is currently opened but has nothing inside.");
+			listener.deliverMessage(
+					"in front of you is a heavy, old dresser, it is currently opened but has nothing inside.");
 		}
 		else if (positionBack == true)
 		{
@@ -1064,8 +1226,14 @@ public class EscapeTheRoom
 		}
 		else if (positionBack == true)
 		{
-			listener.deliverMessage(
-					"you can't open a table, and you can't open the key container, but mabye you could smash it open.");
+			listener.deliverMessage("you can't open a table, and you can't open the key container,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("but mabye you could smash it open.");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 	}
 
@@ -1073,12 +1241,22 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			listener.deliverMessage(
-					"your in the middle of the room standing on the bed, you can feel it creaking under your weight, theres nothing new about the bed, and there's no give in the ceiling when you push against it.");
+			listener.deliverMessage("your in the middle of the room standing on the bed,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("you can feel it creaking under your weight,...");
+				Thread.sleep(2000);
+				listener.deliverMessage(
+						"theres nothing new about the bed, and there's no give in the ceiling when you push against it.");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionLeftSide == true)
 		{
-			listener.deliverMessage("You look at the empty space where the bed used to be and see a whole lot'a nothing.");
+			listener.deliverMessage(
+					"You look at the empty space where the bed used to be and see a whole lot'a nothing.");
 		}
 		else if (positionRightSide == true)
 		{
@@ -1136,7 +1314,13 @@ public class EscapeTheRoom
 		if (positionBack == true && inventory == false)
 		{
 			listener.deliverMessage("You pick up the hammer, it's heavier than you expected.");
-			listener.deliverMessage("You look up and the ceiling looks closer");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("You look up and the ceiling looks closer");
+			} catch (InterruptedException e)
+			{
+			}
 			hammerPickedUp = true;
 			inventory = true;
 		}
@@ -1216,8 +1400,6 @@ public class EscapeTheRoom
 		{
 			listener.deliverMessage(
 					"In front of you is a knee high dirty bed, it has dusty, pale white sheets and a thin pillow at the head.");
-			listener.deliverMessage(
-					"The room is a sqaure shape, the walls are made of concrete, in front of you is a metal door, to Your left you see a ratty bed, to your right you see a dresser, behind you is a table.");
 		}
 		else if (positionLeftSide == true)
 		{
@@ -1225,7 +1407,8 @@ public class EscapeTheRoom
 		}
 		else if (positionRightSide == true)
 		{
-			listener.deliverMessage("in front of you is a heavy, old dresser, it is currently opened but has nothing inside.");
+			listener.deliverMessage(
+					"in front of you is a heavy, old dresser, it is currently opened but has nothing inside.");
 		}
 		else if (positionBack == true)
 		{
@@ -1257,8 +1440,7 @@ public class EscapeTheRoom
 		}
 		else if (positionBack == true)
 		{
-			listener.deliverMessage(
-					"you can't open a table, and you can't open the key container, but mabye you could smash it open.");
+			listener.deliverMessage("You can't open the key container, you might be able to smash it though.");
 		}
 	}
 
@@ -1267,11 +1449,20 @@ public class EscapeTheRoom
 		if (positionMiddle == true)
 		{
 			listener.deliverMessage(
-					"your in the middle of the room standing on the bed, you can feel it creaking under your weight, theres nothing new about the bed, and there's no give in the ceiling when you push against it.");
+					"your in the middle of the room standing on the bed, you can feel it creaking under your weight,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage(
+						"theres nothing new about the bed, and there's no give in the ceiling when you push against it.");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionLeftSide == true)
 		{
-			listener.deliverMessage("You look at the empty space where the bed used to be and see a whole lot'a nothing.");
+			listener.deliverMessage(
+					"You look at the empty space where the bed used to be and see a whole lot'a nothing.");
 		}
 		else if (positionRightSide == true)
 		{
@@ -1281,7 +1472,14 @@ public class EscapeTheRoom
 		else if (positionFront == true)
 		{
 			listener.deliverMessage(
-					"The metal door is locked, and strong enough that you wouldn't be able to break it down, you have to find a key to open it");
+					"The metal door is locked, and strong enough that you wouldn't be able to break it down,...");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("you have to find a key to open it");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else if (positionBack == true && keyOpened == false)
 		{
@@ -1323,7 +1521,7 @@ public class EscapeTheRoom
 
 	private void actionDestroyInEnd()
 	{
-		if (positionBack == true)
+		if (positionBack == true && keyOpened == false)
 			listener.deliverMessage("You smash the glass contiainer apart so the key is free.");
 		keyOpened = true;
 	}
@@ -1332,8 +1530,14 @@ public class EscapeTheRoom
 	{
 		if (positionBack == true && keyOpened == true)
 		{
-			listener.deliverMessage("You pick up the small rust key, it's cold against your fingers.");
-			listener.deliverMessage("The walls are so close, You feel like you're suffocating");
+			listener.deliverMessage("You pick up the small rust key, it's cold against your fingers....");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("The walls are so close, You feel like you're suffocating");
+			} catch (InterruptedException e)
+			{
+			}
 			keyPickedUp = true;
 			inventory = true;
 		}
@@ -1407,10 +1611,17 @@ public class EscapeTheRoom
 	{
 		if (positionFront == true)
 		{
-			listener.deliverMessage("You use the key to unlock the door.");
-			listener.deliverMessage("You swing the door open, as the walls move to crush you.");
-			doorUnlocked = true;
-			listener.deliverMessage("You wake up in a small square room.");
+			listener.deliverMessage("You use the key to unlock the door....");
+			try
+			{
+				Thread.sleep(2000);
+				listener.deliverMessage("You swing the door open, as the walls move to crush you....");
+				doorUnlocked = true;
+				Thread.sleep(2000);
+				listener.deliverMessage("You wake up in a small square room.");
+			} catch (InterruptedException e)
+			{
+			}
 		}
 		else
 		{
@@ -1461,6 +1672,11 @@ public class EscapeTheRoom
 	private void actionPickUpInEndTwo()
 	{
 		listener.deliverMessage("Nothing to pick up.");
+	}
+
+	public boolean hasInventory()
+	{
+		return inventory;
 	}
 
 }

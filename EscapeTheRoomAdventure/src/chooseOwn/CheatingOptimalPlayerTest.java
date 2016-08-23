@@ -17,15 +17,20 @@ public class CheatingOptimalPlayerTest
 		
 		story.playOneAction();
 		assertFalse(adventure.currentStateOfBed());
+		assertFalse(adventure.hasInventory());
 
 		story.playOneAction();
 		assertFalse(adventure.currentStateOfBed());
+		assertTrue(adventure.hasInventory());
 
 		story.playOneAction();
 		assertFalse(adventure.currentStateOfBed());
+		assertTrue(adventure.hasInventory());
 
 		story.playOneAction();
 		assertTrue(adventure.currentStateOfBed());
+		assertFalse(adventure.hasInventory());
+
 		//
 		story.playOneAction();
 		assertFalse(adventure.currentStateOfCrowBar());
