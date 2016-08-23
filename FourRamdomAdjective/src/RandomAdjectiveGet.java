@@ -4,14 +4,15 @@ public class RandomAdjectiveGet
 {
 	public static void main(String[] args)
 	{
-		for(int i =0;i<100;i++)
-		{
-			PrintRandom();
-			PrintRandom();
-			PrintRandom();
+		
 			PrintRandom();
 			System.out.println();
-		}
+			PrintRandom();
+			System.out.println();
+			PrintRandom();
+			System.out.println();
+			PrintRandom();
+			
 	}
 
 	public static void PrintRandom()
