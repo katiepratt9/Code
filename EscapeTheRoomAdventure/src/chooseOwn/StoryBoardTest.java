@@ -11,7 +11,7 @@ public class StoryBoardTest
 	public void test()
 	{
 		EscapeTheRoom adventure = new EscapeTheRoom();
-		StoryBoard story = new StoryBoard(adventure, new HumanPlayer());
+		StoryBoard story = new StoryBoard(adventure, new CheatingOptimalPlayer());
 		assertTrue(story.storyContinue());
 	}
 

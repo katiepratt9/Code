@@ -33,6 +33,7 @@ public class TwoButtons
 		labelButton.setPreferredSize(d);
 
 		label = new JLabel("I'm a label");
+		
 		MyDrawPanel drawPanel = new MyDrawPanel();
 
 		frame.getContentPane().add(BorderLayout.SOUTH, colorButton);
