@@ -19,6 +19,24 @@ public class EscapeTheRoom
 	boolean positionMiddle = true;// 5
 	boolean inventory = false;
 
+	private EscapeTheRoomListener listener;
+	
+	public EscapeTheRoom()
+	{
+		listener = new EscapeTheRoomListener()
+		{
+			@Override
+			public void deliverMessage(String message)
+			{
+				System.out.println(message);
+			}};
+	}
+	
+	public void setListener(EscapeTheRoomListener listener)
+	{
+		this.listener = listener;
+	}
+	
 	public void updatePosition(int value)
 	{
 		if (value == 1)
@@ -174,7 +192,7 @@ public class EscapeTheRoom
 			actionPickUpInBegining();
 			break;
 		default:
-			System.out.println("That is not an action you can do, try again.");
+			listener.deliverMessage("That is not an action you can do, try again.");
 			chooseBegining(action);
 			break;
 		}
@@ -186,18 +204,18 @@ public class EscapeTheRoom
 	{
 		if (inventory = true && positionMiddle == true)
 		{
-			System.out.println("You Place the bed in the middle of the room.");
-			System.out.println("You remember how much you hate tight places");
+			listener.deliverMessage("You Place the bed in the middle of the room.");
+			listener.deliverMessage("You remember how much you hate tight places");
 			inventory = false;
 			bedMoved = true;
 		}
 		else if (inventory = true)
 		{
-			System.out.println("Cannot place here.");
+			listener.deliverMessage("Cannot place here.");
 		}
 		else
 		{
-			System.out.println("You don't have anything to place.");
+			listener.deliverMessage("You don't have anything to place.");
 		}
 
 	}
@@ -206,34 +224,34 @@ public class EscapeTheRoom
 	{
 		if (positionLeftSide == true && bedPickedUp == false)
 		{
-			System.out.println("You Pick up the bed it is heavier than suspected, you need to put it down somewhere.");
+			listener.deliverMessage("You Pick up the bed it is heavier than suspected, you need to put it down somewhere.");
 			inventory = true;
 			bedPickedUp =true;
 		}
 		else if (inventory = true && bedPickedUp == true)
 		{
-			System.out.println("I have to put this down first.");
+			listener.deliverMessage("I have to put this down first.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println("Even if you picked up the hammer, you can't break the lock with it");
+			listener.deliverMessage("Even if you picked up the hammer, you can't break the lock with it");
 		}
 		else
 		{
-			System.out.print("Nothing to pick up");
+			listener.deliverMessage("Nothing to pick up");
 		}
 
 	}
 
 	private void actionDestroyInBegining()
 	{
-		System.out.println("There's nothing to destroy, and nothing to destroy that nothing with.");
+		listener.deliverMessage("There's nothing to destroy, and nothing to destroy that nothing with.");
 
 	}
 
 	private void moveToRightInBegining()
 	{
-		System.out.println("You move to the right so that you are standing in front of the dresser.");
+		listener.deliverMessage("You move to the right so that you are standing in front of the dresser.");
 		updatePosition(4);
 	}
 
@@ -241,31 +259,31 @@ public class EscapeTheRoom
 	{
 		if (bedPickedUp == true)
 		{
-			System.out.print("Nothing here.");
+			listener.deliverMessage("Nothing here.");
 		}
 		else
 		{
-			System.out.println("You move to the left so that you are standing in front of the bed.");
+			listener.deliverMessage("You move to the left so that you are standing in front of the bed.");
 			updatePosition(3);
 		}
 	}
 
 	private void moveToBackInBegining()
 	{
-		System.out.println("You move to the back so that you are standing in front of the table.");
+		listener.deliverMessage("You move to the back so that you are standing in front of the table.");
 		updatePosition(2);
 	}
 
 	private void moveToFrontInBegining()
 	{
-		System.out.println("You move to the front so that you are standing in front of the metal door");
+		listener.deliverMessage("You move to the front so that you are standing in front of the metal door");
 		updatePosition(1);
 
 	}
 
 	private void moveToMiddleInBegining()
 	{
-		System.out.println("You move to the middle.");
+		listener.deliverMessage("You move to the middle.");
 		updatePosition(5);
 	}
 
@@ -273,25 +291,25 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println("your in the middle of the room there's nothing to examine");
+			listener.deliverMessage("your in the middle of the room there's nothing to examine");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"The bed looks uncomfortable to sleep on, it also looks light, mabye even light enough to carry...");
 		}
 		else if (positionRightSide == true)
 		{
-			System.out.println("The dresser is a faded brown, it looks sturdy and would be immposible to move");
+			listener.deliverMessage("The dresser is a faded brown, it looks sturdy and would be immposible to move");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"The metal door is locked, and strong enough that you wouldn't be able to break it down, you have to find a key to open it");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println("the table has a hammer sitting on it, the hammer looks weak from overuse.");
+			listener.deliverMessage("the table has a hammer sitting on it, the hammer looks weak from overuse.");
 		}
 	}
 
@@ -299,32 +317,32 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"The room is a sqaure shape, the walls are made of concrete, in front of you is a metal door, to Your left you see a ratty bed, to your right you see a dresser, behind you is a table.");
 		}
 		else if (positionLeftSide == true)
 		{
 			if (bedPickedUp == true)
 			{
-				System.out.println("Nothing Here.");
+				listener.deliverMessage("Nothing Here.");
 			}
 			else
 			{
-				System.out.println(
+				listener.deliverMessage(
 						"In front of you is a knee high dirty bed, it has dusty, pale white sheets and a thin pillow at the head.");
 			}
 		}
 		else if (positionRightSide == true)
 		{
-			System.out.println("in front of you is a heavy, old dresser, it is currently closed.");
+			listener.deliverMessage("in front of you is a heavy, old dresser, it is currently closed.");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println("In front of you is a shaky wooden table.");
+			listener.deliverMessage("In front of you is a shaky wooden table.");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println("In front of you is a rusty metal door.");
+			listener.deliverMessage("In front of you is a rusty metal door.");
 		}
 	}
 
@@ -332,24 +350,24 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println("your in the middle of the room there's nothing to open.");
+			listener.deliverMessage("your in the middle of the room there's nothing to open.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println("you can't open a bed.");
+			listener.deliverMessage("you can't open a bed.");
 		}
 		else if (positionRightSide == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"The dresser isn't locked, but doors are stuck and wont budge open, you need something to get some leverage.");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println("worth a shot, but the metal door remains locked, closed and daunting.");
+			listener.deliverMessage("worth a shot, but the metal door remains locked, closed and daunting.");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println("you can't open a table.");
+			listener.deliverMessage("you can't open a table.");
 		}
 	}
 
@@ -405,58 +423,58 @@ public class EscapeTheRoom
 	{
 		if (positionLeftSide == true)
 		{
-			System.out.print("You bend down and pick up the crowbar, it looks like its been sitting there for years.");
+			listener.deliverMessage("You bend down and pick up the crowbar, it looks like its been sitting there for years.");
 			inventory = true;
 			crowbarPickedUp = true;
-			System.out.println("The room seems smaller than it was a second ago");
+			listener.deliverMessage("The room seems smaller than it was a second ago");
 		}
 		else if (positionBack == true)
-			System.out.print("Even if you picked up the hammer, theres nothing to use it on.");
+			listener.deliverMessage("Even if you picked up the hammer, theres nothing to use it on.");
 		else
 		{
-			System.out.print("Nothing to pick up.");
+			listener.deliverMessage("Nothing to pick up.");
 		}
 	}
 
 	private void actionDestroyInBeginingTwo()
 	{
-		System.out.println("There's nothing to destroy, and nothing to destroy that nothing with.");
+		listener.deliverMessage("There's nothing to destroy, and nothing to destroy that nothing with.");
 	}
 
 	private void PlaceInBeginingTwo()
 	{
-		System.out.println("You don't have anything to place.");
+		listener.deliverMessage("You don't have anything to place.");
 	}
 
 	private void moveToRightInBeginingTwo()
 	{
-		System.out.println("You move to the right so that you are standing in front of the dresser.");
+		listener.deliverMessage("You move to the right so that you are standing in front of the dresser.");
 		updatePosition(4);
 	}
 
 	private void moveToLeftInBeginingTwo()
 	{
-		System.out.println("You move to the left so that you are standing in front of where the bed used to be.");
+		listener.deliverMessage("You move to the left so that you are standing in front of where the bed used to be.");
 		updatePosition(3);
 
 	}
 
 	private void moveToBackInBeginingTwo()
 	{
-		System.out.println("You move to the back so that you are standing in front of the table.");
+		listener.deliverMessage("You move to the back so that you are standing in front of the table.");
 		updatePosition(2);
 	}
 
 	private void moveToFrontInBeginingTwo()
 	{
-		System.out.println("You move to the front so that you are standing in front of the metal door");
+		listener.deliverMessage("You move to the front so that you are standing in front of the metal door");
 		updatePosition(1);
 
 	}
 
 	private void moveToMiddleInBeginingTwo()
 	{
-		System.out.println("You move to the middle so that you are standing on the bed");
+		listener.deliverMessage("You move to the middle so that you are standing on the bed");
 		updatePosition(5);
 	}
 
@@ -464,26 +482,26 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"your in the middle of the room standing on the bed, you can feel it creaking under your weight, theres nothing new about the bed, and there's no give in the ceiling when you push against it.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"You look at the empty space where the bed used to be and see a crowbar lying on the floor, it looks like it's been there for years.");
 		}
 		else if (positionRightSide == true )
 		{
-			System.out.println("The dresser is a faded brown, it looks sturdy and would be immposible to move");
+			listener.deliverMessage("The dresser is a faded brown, it looks sturdy and would be immposible to move");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"The metal door is locked, and strong enough that you wouldn't be able to break it down, you have to find a key to open it");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println("the table has a hammer sitting on it, the hammer looks weak from overuse.");
+			listener.deliverMessage("the table has a hammer sitting on it, the hammer looks weak from overuse.");
 		}
 
 	}
@@ -492,24 +510,24 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println("you can't open a bed.");
+			listener.deliverMessage("you can't open a bed.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println("There's nothing to open.");
+			listener.deliverMessage("There's nothing to open.");
 		}
 		else if (positionRightSide == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"The dresser isn't locked, but doors are stuck and wont budge open, you need something to get some leverage.");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println("still locked.");
+			listener.deliverMessage("still locked.");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println("you can't open a table.");
+			listener.deliverMessage("you can't open a table.");
 		}
 
 	}
@@ -518,27 +536,27 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"In front of you is a knee high dirty bed, it has dusty, pale white sheets and a thin pillow at the head.");
-			System.out.println(
+			listener.deliverMessage(
 					"The room is a sqaure shape, the walls are made of concrete, in front of you is a metal door, to Your left you see a ratty bed, to your right you see a dresser, behind you is a table.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println("Just an empty space.");
+			listener.deliverMessage("Just an empty space.");
 
 		}
 		else if (positionRightSide == true)
 		{
-			System.out.println("in front of you is a heavy, old dresser, it is currently closed.");
+			listener.deliverMessage("in front of you is a heavy, old dresser, it is currently closed.");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println("In front of you is a shaky wooden table.");
+			listener.deliverMessage("In front of you is a shaky wooden table.");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println("In front of you is a rusty metal door.");
+			listener.deliverMessage("In front of you is a rusty metal door.");
 		}
 	}
 
@@ -581,7 +599,7 @@ public class EscapeTheRoom
 			actionPickUpInMiddle();
 			break;
 		default:
-			System.out.println("That is not an action you can do, try again.");
+			listener.deliverMessage("That is not an action you can do, try again.");
 			chooseMiddle(action);
 			break;
 		}
@@ -595,65 +613,65 @@ public class EscapeTheRoom
 	{
 		if (positionRightSide == true && dresserOpened == true)
 		{
-			System.out.print("You pick up a glass container with a key in it, you can't open it.");
-			System.out.println("you feel like the room is shrinking");
+			listener.deliverMessage("You pick up a glass container with a key in it, you can't open it.");
+			listener.deliverMessage("you feel like the room is shrinking");
 			inventory = true;
 			keyContainerPickedUp = true;
 		}
 		else if (positionBack == true)
 		{
-			System.out.print("even if you picked up the hammer you have nothing to use it on.");
+			listener.deliverMessage("even if you picked up the hammer you have nothing to use it on.");
 		}
 		else
 		{
-			System.out.print("Nothing to pick up.");
+			listener.deliverMessage("Nothing to pick up.");
 		}
 
 	}
 
 	private void actionDestroyInMiddle()
 	{
-		System.out.println("There's nothing to destroy, and nothing to destroy that nothing with.");
+		listener.deliverMessage("There's nothing to destroy, and nothing to destroy that nothing with.");
 
 	}
 
 	private void PlaceInMiddle()
 	{if(inventory = false)
 	{
-		System.out.println("You don't have anything to place.");
+		listener.deliverMessage("You don't have anything to place.");
 	}
 	else
 	{
-	System.out.println("why would you place the crowbar?");	
+	listener.deliverMessage("why would you place the crowbar?");	
 	}
 	}
 	private void moveToRightInMiddle()
 	{
-		System.out.println("You move to the right so that you are standing in front of the dresser.");
+		listener.deliverMessage("You move to the right so that you are standing in front of the dresser.");
 		updatePosition(4);
 	}
 
 	private void moveToLeftInMiddle()
 	{
-		System.out.println("You move to the left so that you are standing in front of where the bed used to be.");
+		listener.deliverMessage("You move to the left so that you are standing in front of where the bed used to be.");
 		updatePosition(3);
 	}
 
 	private void moveToBackInMiddle()
 	{
-		System.out.println("You move to the back so that you are standing in front of the table.");
+		listener.deliverMessage("You move to the back so that you are standing in front of the table.");
 		updatePosition(2);
 	}
 
 	private void moveToFrontInMiddle()
 	{
-		System.out.println("You move to the front so that you are standing in front of the metal door");
+		listener.deliverMessage("You move to the front so that you are standing in front of the metal door");
 		updatePosition(1);
 	}
 
 	private void moveToMiddleInMiddle()
 	{
-		System.out.println("You move to the middle so that you are standing on the bed");
+		listener.deliverMessage("You move to the middle so that you are standing on the bed");
 		updatePosition(5);
 	}
 
@@ -661,30 +679,30 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"your in the middle of the room standing on the bed, you can feel it creaking under your weight, theres nothing new about the bed, and there's no give in the ceiling when you push against it.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println("You look at the empty space where the bed used to be and see a whole lot'a nothing.");
+			listener.deliverMessage("You look at the empty space where the bed used to be and see a whole lot'a nothing.");
 		}
 		else if (positionRightSide == true && dresserOpened == false)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"The dresser is a faded brown, it looks sturdy and would be immposible to move, but you can probably use the crowbar to open it.");
 		}
 		else if (dresserOpened == true)
 		{
-		System.out.println("You see a glass container with something encased in it on one of the shelves.");
+		listener.deliverMessage("You see a glass container with something encased in it on one of the shelves.");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"The metal door is locked, and strong enough that you wouldn't be able to break it down, you have to find a key to open it");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println("the table has a hammer sitting on it, the hammer looks weak from overuse.");
+			listener.deliverMessage("the table has a hammer sitting on it, the hammer looks weak from overuse.");
 		}
 
 	}
@@ -693,28 +711,28 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println("you can't open a bed.");
+			listener.deliverMessage("you can't open a bed.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println("There's nothing to open.");
+			listener.deliverMessage("There's nothing to open.");
 		}
 		else if (positionRightSide == true && dresserOpened == false)
 		{
-			System.out.println("You use the crowbar to open the dresser, dust fly's everywhere.");
+			listener.deliverMessage("You use the crowbar to open the dresser, dust fly's everywhere.");
 			dresserOpened = true;
 		}
 		else if(dresserOpened == true)
 		{
-			System.out.println("already opened.");
+			listener.deliverMessage("already opened.");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println("still locked.");
+			listener.deliverMessage("still locked.");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println("you can't open a table.");
+			listener.deliverMessage("you can't open a table.");
 		}
 	}
 
@@ -722,30 +740,30 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"In front of you is a knee high dirty bed, it has dusty, pale white sheets and a thin pillow at the head.");
-			System.out.println(
+			listener.deliverMessage(
 					"The room is a sqaure shape, the walls are made of concrete, in front of you is a metal door, to Your left you see a ratty bed, to your right you see a dresser, behind you is a table.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println("Just an empty space.");
+			listener.deliverMessage("Just an empty space.");
 		}
 		else if (positionRightSide == true && dresserOpened == false)
 		{
-			System.out.println("in front of you is a heavy, old dresser, it is currently closed.");
+			listener.deliverMessage("in front of you is a heavy, old dresser, it is currently closed.");
 		}
 		else if(dresserOpened == true)
 		{
-			System.out.println("The dresser is opened, you see something inside.");
+			listener.deliverMessage("The dresser is opened, you see something inside.");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println("In front of you is a shaky wooden table.");
+			listener.deliverMessage("In front of you is a shaky wooden table.");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println("In front of you is a rusty metal door.");
+			listener.deliverMessage("In front of you is a rusty metal door.");
 		}
 	}
 
@@ -787,7 +805,7 @@ public class EscapeTheRoom
 			actionPickUpInMiddleTwo();
 			break;
 		default:
-			System.out.println("That is not an action you can do, try again.");
+			listener.deliverMessage("That is not an action you can do, try again.");
 			chooseMiddleTwo(action);
 			break;
 		}
@@ -801,63 +819,63 @@ public class EscapeTheRoom
 	{
 		if (positionBack == true)
 		{
-			System.out.print("Your already holding the key, you have to put it down first.");
+			listener.deliverMessage("Your already holding the key, you have to put it down first.");
 		}
 		else
 		{
-			System.out.print("Nothing to pick up.");
+			listener.deliverMessage("Nothing to pick up.");
 		}
 
 	}
 
 	private void actionDestroyInMiddleTwo()
 	{
-		System.out.println("There's nothing to destroy, and nothing to destroy that nothing with.");
+		listener.deliverMessage("There's nothing to destroy, and nothing to destroy that nothing with.");
 	}
 
 	private void PlaceInMiddleTwo()
 	{
 		if (positionBack == true)
 		{
-			System.out.println("You place the glass container on the table.");
-			System.out.println("You think you see a the walls move out of the corner of your eye");
+			listener.deliverMessage("You place the glass container on the table.");
+			listener.deliverMessage("You think you see a the walls move out of the corner of your eye");
 			inventory = false;
 			keyContainerPlaced = true;
 		}
 		else
 		{
-			System.out.println("why would you place the key here?");
+			listener.deliverMessage("why would you place the key here?");
 		}
 	}
 
 	private void moveToRightInMiddleTwo()
 	{
-		System.out.println("You move to the right so that you are standing in front of the dresser.");
+		listener.deliverMessage("You move to the right so that you are standing in front of the dresser.");
 		updatePosition(4);
 	}
 
 	private void moveToLeftInMiddleTwo()
 	{
-		System.out.println("You move to the left so that you are standing in front of where the bed used to be.");
+		listener.deliverMessage("You move to the left so that you are standing in front of where the bed used to be.");
 		updatePosition(3);
 	}
 
 	private void moveToBackInMiddleTwo()
 	{
-		System.out.println("You move to the back so that you are standing in front of the table.");
+		listener.deliverMessage("You move to the back so that you are standing in front of the table.");
 		updatePosition(2);
 
 	}
 
 	private void moveToFrontInMiddleTwo()
 	{
-		System.out.println("You move to the front so that you are standing in front of the metal door");
+		listener.deliverMessage("You move to the front so that you are standing in front of the metal door");
 		updatePosition(1);
 	}
 
 	private void moveToMiddleInMiddleTwo()
 	{
-		System.out.println("You move to the middle so that you are standing on the bed");
+		listener.deliverMessage("You move to the middle so that you are standing on the bed");
 		updatePosition(5);
 	}
 
@@ -865,26 +883,26 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"your in the middle of the room standing on the bed, you can feel it creaking under your weight, theres nothing new about the bed, and there's no give in the ceiling when you push against it.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println("You look at the empty space where the bed used to be and see a whole lot'a nothing.");
+			listener.deliverMessage("You look at the empty space where the bed used to be and see a whole lot'a nothing.");
 		}
 		else if (positionRightSide == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"The dresser is a faded brown, it looks sturdy and would be immposible to move, it's currently empty.");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"The metal door is locked, and strong enough that you wouldn't be able to break it down, you have to find a key to open it");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println("the table has a hammer sitting on it, the hammer looks weak from overuse.");
+			listener.deliverMessage("the table has a hammer sitting on it, the hammer looks weak from overuse.");
 		}
 
 	}
@@ -893,24 +911,24 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println("you can't open a bed.");
+			listener.deliverMessage("you can't open a bed.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println("There's nothing to open.");
+			listener.deliverMessage("There's nothing to open.");
 		}
 		else if (positionRightSide == true)
 		{
-			System.out.println("The dresser is already opened.");
+			listener.deliverMessage("The dresser is already opened.");
 			dresserOpened = true;
 		}
 		else if (positionFront == true)
 		{
-			System.out.println("still locked.");
+			listener.deliverMessage("still locked.");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println("you can't open a table.");
+			listener.deliverMessage("you can't open a table.");
 		}
 
 	}
@@ -919,27 +937,26 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"In front of you is a knee high dirty bed, it has dusty, pale white sheets and a thin pillow at the head.");
-			System.out.println(
+			listener.deliverMessage(
 					"The room is a sqaure shape, the walls are made of concrete, in front of you is a metal door, to Your left you see a ratty bed, to your right you see a dresser, behind you is a table.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println("Just an empty space.");
+			listener.deliverMessage("Just an empty space.");
 		}
 		else if (positionRightSide == true)
 		{
-			System.out
-					.println("in front of you is a heavy, old dresser, it is currently opened but has nothing inside.");
+			listener.deliverMessage("in front of you is a heavy, old dresser, it is currently opened but has nothing inside.");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println("In front of you is a shaky wooden table.");
+			listener.deliverMessage("In front of you is a shaky wooden table.");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println("In front of you is a rusty metal door.");
+			listener.deliverMessage("In front of you is a rusty metal door.");
 		}
 
 	}
@@ -983,7 +1000,7 @@ public class EscapeTheRoom
 			actionPickUpInMiddleThree();
 			break;
 		default:
-			System.out.println("That is not an action you can do, try again.");
+			listener.deliverMessage("That is not an action you can do, try again.");
 			chooseMiddleThree(action);
 			break;
 		}
@@ -995,7 +1012,7 @@ public class EscapeTheRoom
 
 	private void moveToMiddleInMiddleThree()
 	{
-		System.out.println("You move to the middle so that you are standing on the bed");
+		listener.deliverMessage("You move to the middle so that you are standing on the bed");
 		updatePosition(5);
 	}
 
@@ -1003,27 +1020,26 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"In front of you is a knee high dirty bed, it has dusty, pale white sheets and a thin pillow at the head.");
-			System.out.println(
+			listener.deliverMessage(
 					"The room is a sqaure shape, the walls are made of concrete, in front of you is a metal door, to Your left you see a ratty bed, to your right you see a dresser, behind you is a table.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println("Just an empty space.");
+			listener.deliverMessage("Just an empty space.");
 		}
 		else if (positionRightSide == true)
 		{
-			System.out
-					.println("in front of you is a heavy, old dresser, it is currently opened but has nothing inside.");
+			listener.deliverMessage("in front of you is a heavy, old dresser, it is currently opened but has nothing inside.");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println("In front of you is a shaky wooden table.");
+			listener.deliverMessage("In front of you is a shaky wooden table.");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println("In front of you is a rusty metal door.");
+			listener.deliverMessage("In front of you is a rusty metal door.");
 		}
 
 	}
@@ -1032,23 +1048,23 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println("you can't open a bed.");
+			listener.deliverMessage("you can't open a bed.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println("There's nothing to open.");
+			listener.deliverMessage("There's nothing to open.");
 		}
 		else if (positionRightSide == true)
 		{
-			System.out.println("The dresser is already opened.");
+			listener.deliverMessage("The dresser is already opened.");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println("still locked.");
+			listener.deliverMessage("still locked.");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"you can't open a table, and you can't open the key container, but mabye you could smash it open.");
 		}
 	}
@@ -1057,76 +1073,76 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"your in the middle of the room standing on the bed, you can feel it creaking under your weight, theres nothing new about the bed, and there's no give in the ceiling when you push against it.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println("You look at the empty space where the bed used to be and see a whole lot'a nothing.");
+			listener.deliverMessage("You look at the empty space where the bed used to be and see a whole lot'a nothing.");
 		}
 		else if (positionRightSide == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"The dresser is a faded brown, it looks sturdy and would be immposible to move, it's currently empty.");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"The metal door is locked, and strong enough that you wouldn't be able to break it down, you have to find a key to open it");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"the table has a hammer sitting on it, the hammer looks weak from overuse, mabye you can use it to open the container.");
 		}
 	}
 
 	private void moveToFrontInMiddleThree()
 	{
-		System.out.println("You move to the front so that you are standing in front of the metal door");
+		listener.deliverMessage("You move to the front so that you are standing in front of the metal door");
 		updatePosition(1);
 	}
 
 	private void moveToBackInMiddleThree()
 	{
-		System.out.println("You move to the back so that you are standing in front of the table.");
+		listener.deliverMessage("You move to the back so that you are standing in front of the table.");
 		updatePosition(2);
 	}
 
 	private void moveToLeftInMiddleThree()
 	{
-		System.out.println("You move to the left so that you are standing in front of where the bed used to be.");
+		listener.deliverMessage("You move to the left so that you are standing in front of where the bed used to be.");
 		updatePosition(3);
 	}
 
 	private void moveToRightInMiddleThree()
 	{
-		System.out.println("You move to the right so that you are standing in front of the dresser.");
+		listener.deliverMessage("You move to the right so that you are standing in front of the dresser.");
 		updatePosition(4);
 	}
 
 	private void PlaceInMiddleThree()
 	{
-		System.out.println("You have nothing to place.");
+		listener.deliverMessage("You have nothing to place.");
 	}
 
 	private void actionDestroyInMiddleThree()
 	{
-		System.out.println("You can't smash the container with your fist's, you need to pick up the hammer.");
+		listener.deliverMessage("You can't smash the container with your fist's, you need to pick up the hammer.");
 	}
 
 	private void actionPickUpInMiddleThree()
 	{
 		if (positionBack == true && inventory == false)
 		{
-			System.out.print("You pick up the hammer, it's heavier than you expected.");
-			System.out.println("You look up and the ceiling looks closer");
+			listener.deliverMessage("You pick up the hammer, it's heavier than you expected.");
+			listener.deliverMessage("You look up and the ceiling looks closer");
 			hammerPickedUp = true;
 			inventory = true;
 		}
 		else
 		{
-			System.out.print("Nothing to pick up.");
+			listener.deliverMessage("Nothing to pick up.");
 		}
 	}
 
@@ -1168,7 +1184,7 @@ public class EscapeTheRoom
 			actionPickUpInEnd();
 			break;
 		default:
-			System.out.println("That is not an action you can do, try again.");
+			listener.deliverMessage("That is not an action you can do, try again.");
 			chooseEnd(action);
 			break;
 		}
@@ -1180,17 +1196,17 @@ public class EscapeTheRoom
 
 	private void moveToMiddleInEnd()
 	{
-		System.out.println("You move to the middle so that you are standing on the bed");
+		listener.deliverMessage("You move to the middle so that you are standing on the bed");
 		updatePosition(5);
 	}
 
 	private void PlaceInEnd()
 	{
 		if (keyOpened == true && positionBack == true)
-			System.out.println("you put down the hammer.");
+			listener.deliverMessage("you put down the hammer.");
 		else
 		{
-			System.out.println("why would you put the hammer down?");
+			listener.deliverMessage("why would you put the hammer down?");
 		}
 	}
 
@@ -1198,27 +1214,26 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"In front of you is a knee high dirty bed, it has dusty, pale white sheets and a thin pillow at the head.");
-			System.out.println(
+			listener.deliverMessage(
 					"The room is a sqaure shape, the walls are made of concrete, in front of you is a metal door, to Your left you see a ratty bed, to your right you see a dresser, behind you is a table.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println("Just an empty space.");
+			listener.deliverMessage("Just an empty space.");
 		}
 		else if (positionRightSide == true)
 		{
-			System.out
-					.println("in front of you is a heavy, old dresser, it is currently opened but has nothing inside.");
+			listener.deliverMessage("in front of you is a heavy, old dresser, it is currently opened but has nothing inside.");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println("In front of you is a shaky wooden table.");
+			listener.deliverMessage("In front of you is a shaky wooden table.");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println("In front of you is a rusty metal door.");
+			listener.deliverMessage("In front of you is a rusty metal door.");
 		}
 	}
 
@@ -1226,23 +1241,23 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println("you can't open a bed.");
+			listener.deliverMessage("you can't open a bed.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println("There's nothing to open.");
+			listener.deliverMessage("There's nothing to open.");
 		}
 		else if (positionRightSide == true)
 		{
-			System.out.println("The dresser is already opened.");
+			listener.deliverMessage("The dresser is already opened.");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println("still locked.");
+			listener.deliverMessage("still locked.");
 		}
 		else if (positionBack == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"you can't open a table, and you can't open the key container, but mabye you could smash it open.");
 		}
 	}
@@ -1251,57 +1266,57 @@ public class EscapeTheRoom
 	{
 		if (positionMiddle == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"your in the middle of the room standing on the bed, you can feel it creaking under your weight, theres nothing new about the bed, and there's no give in the ceiling when you push against it.");
 		}
 		else if (positionLeftSide == true)
 		{
-			System.out.println("You look at the empty space where the bed used to be and see a whole lot'a nothing.");
+			listener.deliverMessage("You look at the empty space where the bed used to be and see a whole lot'a nothing.");
 		}
 		else if (positionRightSide == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"The dresser is a faded brown, it looks sturdy and would be immposible to move, it's currently empty.");
 		}
 		else if (positionFront == true)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"The metal door is locked, and strong enough that you wouldn't be able to break it down, you have to find a key to open it");
 		}
 		else if (positionBack == true && keyOpened == false)
 		{
-			System.out.println(
+			listener.deliverMessage(
 					"the table has a hammer sitting on it, the hammer looks weak from overuse, mabye you can use it to open the container.");
 		}
 		else if (positionBack == true && keyOpened == true)
 		{
-			System.out.println("the table has the smashed container on it, and the rusty key is acessable.");
+			listener.deliverMessage("the table has the smashed container on it, and the rusty key is acessable.");
 		}
 
 	}
 
 	private void moveToFrontInEnd()
 	{
-		System.out.println("You move to the front so that you are standing in front of the metal door");
+		listener.deliverMessage("You move to the front so that you are standing in front of the metal door");
 		updatePosition(1);
 	}
 
 	private void moveToBackInEnd()
 	{
-		System.out.println("You move to the back so that you are standing in front of the table.");
+		listener.deliverMessage("You move to the back so that you are standing in front of the table.");
 		updatePosition(2);
 	}
 
 	private void moveToLeftInEnd()
 	{
-		System.out.println("You move to the left so that you are standing in front of where the bed used to be.");
+		listener.deliverMessage("You move to the left so that you are standing in front of where the bed used to be.");
 		updatePosition(3);
 
 	}
 
 	private void moveToRightInEnd()
 	{
-		System.out.println("You move to the right so that you are standing in front of the dresser.");
+		listener.deliverMessage("You move to the right so that you are standing in front of the dresser.");
 		updatePosition(4);
 
 	}
@@ -1309,7 +1324,7 @@ public class EscapeTheRoom
 	private void actionDestroyInEnd()
 	{
 		if (positionBack == true)
-			System.out.println("You smash the glass contiainer apart so the key is free.");
+			listener.deliverMessage("You smash the glass contiainer apart so the key is free.");
 		keyOpened = true;
 	}
 
@@ -1317,14 +1332,14 @@ public class EscapeTheRoom
 	{
 		if (positionBack == true && keyOpened == true)
 		{
-			System.out.print("You pick up the small rust key, it's cold against your fingers.");
-			System.out.println("The walls are so close, You feel like you're suffocating");
+			listener.deliverMessage("You pick up the small rust key, it's cold against your fingers.");
+			listener.deliverMessage("The walls are so close, You feel like you're suffocating");
 			keyPickedUp = true;
 			inventory = true;
 		}
 		else
 		{
-			System.out.print("Nothing to pick up.");
+			listener.deliverMessage("Nothing to pick up.");
 		}
 	}
 
@@ -1367,7 +1382,7 @@ public class EscapeTheRoom
 			actionPickUpInEndTwo();
 			break;
 		default:
-			System.out.println("That is not an action you can do, try again.");
+			listener.deliverMessage("That is not an action you can do, try again.");
 			chooseEndTwo(action);
 			break;
 		}
@@ -1379,73 +1394,73 @@ public class EscapeTheRoom
 
 	private void moveToMiddleInEndTwo()
 	{
-		System.out.println("You move to the middle so that you are standing on the bed");
+		listener.deliverMessage("You move to the middle so that you are standing on the bed");
 		updatePosition(5);
 	}
 
 	private void lookInEndTwo()
 	{
-		System.out.println("what are you looking around, hurry and leave.");
+		listener.deliverMessage("what are you looking around, hurry and leave.");
 	}
 
 	private void openInEndTwo()
 	{
 		if (positionFront == true)
 		{
-			System.out.println("You use the key to unlock the door.");
-			System.out.println("You swing the door open, as the walls move to crush you.");
+			listener.deliverMessage("You use the key to unlock the door.");
+			listener.deliverMessage("You swing the door open, as the walls move to crush you.");
 			doorUnlocked = true;
-			System.out.println("You wake up in a small square room.");
+			listener.deliverMessage("You wake up in a small square room.");
 		}
 		else
 		{
-			System.out.println("There's only one thing you need to open right now, and that's the door.");
+			listener.deliverMessage("There's only one thing you need to open right now, and that's the door.");
 		}
 	}
 
 	private void examineInEndTwo()
 	{
-		System.out.println("You know what needs a good examining? the door.");
+		listener.deliverMessage("You know what needs a good examining? the door.");
 	}
 
 	private void moveToFrontInEndTwo()
 	{
-		System.out.println("You move to the front so that you are standing in front of the metal door");
+		listener.deliverMessage("You move to the front so that you are standing in front of the metal door");
 		updatePosition(1);
 	}
 
 	private void moveToBackInEndTwo()
 	{
-		System.out.println("You move to the back so that you are standing in front of the table.");
+		listener.deliverMessage("You move to the back so that you are standing in front of the table.");
 		updatePosition(2);
 	}
 
 	private void moveToLeftInEndTwo()
 	{
-		System.out.println("You move to the left so that you are standing in front of where the bed used to be.");
+		listener.deliverMessage("You move to the left so that you are standing in front of where the bed used to be.");
 		updatePosition(3);
 
 	}
 
 	private void moveToRightInEndTwo()
 	{
-		System.out.println("You move to the right so that you are standing in front of the dresser.");
+		listener.deliverMessage("You move to the right so that you are standing in front of the dresser.");
 		updatePosition(4);
 	}
 
 	private void PlaceInEndTwo()
 	{
-		System.out.println("why would you place the key?");
+		listener.deliverMessage("why would you place the key?");
 	}
 
 	private void actionDestroyInEndTwo()
 	{
-		System.out.println("There's nothing to destroy, and nothing to destroy that nothing with.");
+		listener.deliverMessage("There's nothing to destroy, and nothing to destroy that nothing with.");
 	}
 
 	private void actionPickUpInEndTwo()
 	{
-		System.out.print("Nothing to pick up.");
+		listener.deliverMessage("Nothing to pick up.");
 	}
 
 }
